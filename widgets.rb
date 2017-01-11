@@ -8,11 +8,14 @@ class Widgets
   file = FileIO.new()
   employees = file.readData
   puts employees[1].name
-  # File.open("widgets.csv", "r") do |f|
-  #   f.each_line do |line|
-  #     splitLine = line.split(',')
-  #     puts splitLine[0]
-  #     em = Employee.new(splitLine[0], splitLine[1], splitLine[2], splitLine[3], splitLine[4], splitLine[5])
-  #   end
-  # end
+
+  sortE = employees.sort { |x,y| x.name.downcase <=> y.name.downcase }
+  puts sortE[0].name
+  sortE2 = employees.sort_by { |x| x.name.downcase }
+  puts sortE2[0].name
+  sortID = employees.sort_by { |x| x.state }
+  puts sortID[0].name
+
+  est = employees.select { |m| m.state =~ /12/ }#employees.select do |x| x.state == 12  end#find_all { |x| x.state = 12 }
+  est.each { |x| puts x.state }
 end

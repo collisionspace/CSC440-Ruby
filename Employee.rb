@@ -6,8 +6,4 @@ class Employee
   def initialize(st, plant, dept, empid, name, count)
     @state, @plant, @dept, @empid, @name, @count = st, plant, dept, empid, name, count
   end
-
-  # def getState
-  #   @state
-  # end
 end
