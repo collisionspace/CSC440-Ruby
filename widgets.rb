@@ -16,22 +16,26 @@ class Widgets
   # puts sortE2[0].name
   #employees = employees.sort_by { |x| x.state }
   dept_nums = []
+  dept_plants = []
   employees.each { |x| dept_nums << x.dept}
-  dept_nums.uniq.each { |x| puts x}
+  dept_nums = dept_nums.uniq
 
-  i = 0
-  e = 0
-  while true
-    while employees[e].dept == dept_nums[i] do
-      file.outputLine(employees[e])
-      e += 1
-    end
-    dept = employees.select { |m| m.dept ==  dept_nums[i] }
-    b = dept.map(&:count).inject(0, :+)
+  employees.each { |x| dept_plants << x.plant}
+  puts employees.select { |m| m.plant ==  dept_plants[0] }.count
+
+  index = 0
+  dept_nums.each { |deptn|
+    #selects employees of said dept num
+    dept_employees = employees.select { |m| m.dept ==  deptn }
+    #outputs those employees
+    dept_employees.each { |employee|
+      file.outputLine(employee)
+    }
+    #adds the count
+    b = dept_employees.map(&:count).inject(0, :+)
     puts b
-    i += 1
-    if e == 12 then break end
-  end
+    index += 1
+  }
 
   employees.each do |x|
     puts x.dept
