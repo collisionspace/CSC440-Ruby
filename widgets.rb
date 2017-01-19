@@ -3,21 +3,13 @@ require "./FileIO"
 require "./Array"
 
 class Widgets
-  puts "hello"
-  # puts File.read("widgets.csv")
-
   file = FileIO.new()
   employees = file.readData
 
-  dept_nums = []
   dept_state = []
-  employees.each { |x| dept_nums << x.dept }
-  dept_nums = dept_nums.uniq
-
-
   employees.each { |x| dept_state << x.state }
   employee_state = dept_state.uniq
-
+  puts "STATE PLANT DEPT EMPID COUNT NAME"
   #states
   employee_state.each { |state|
     employees_state = employees.select { |employee| employee.state == state }
@@ -34,13 +26,14 @@ class Widgets
 
       #dept
       employee_dept_uni.each { |dept|
+        puts ""
         employees_dept =  employees.select { |employee| employee.dept == dept }
         employees_dept.each { |x| file.outputEmployee(x) }
-        printf "\n%14s TOTAL FOR DEPT %-3s *\n", employees_dept.map(&:count).inject(0, :+), dept
+        printf "\n%28s TOTAL FOR DEPT %-3s *\n", employees_dept.map(&:count).inject(0, :+), dept
       }
-      printf "%14s TOTAL FOR PLANT %-2s **\n", employees_plant.map(&:count).inject(0, :+), plant_num
+      printf "%28s TOTAL FOR PLANT %-2s **\n", employees_plant.map(&:count).inject(0, :+), plant_num
     }
-    printf "%14s TOTAL FOR STATE %s ***\n", employees_state.map(&:count).inject(0, :+), state
-    printf "%14s GRAND TOTAL \t\t****\n", employees.map(&:count).inject(0, :+), state
+    printf "%28s TOTAL FOR STATE %s ***\n", employees_state.map(&:count).inject(0, :+), state
   }
+  printf "\n%28s GRAND TOTAL \t\t****\n", employees.map(&:count).inject(0, :+)
 end
