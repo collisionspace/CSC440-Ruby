@@ -14,7 +14,7 @@ class FileIO
     return employees
   end
 
-  def outputLine(employee)
+  def outputEmployee(employee)
     printf "%s %s %s %s %s %s\n", employee.state, employee.plant, employee.dept, employee.empid, employee.count, employee.name
   end
 end

@@ -16,29 +16,31 @@ class Widgets
 
 
   employees.each { |x| dept_state << x.state }
-  dept_state = dept_state.uniq
+  employee_state = dept_state.uniq
 
-  dept_state.each { |state|
-    #all 12's
+  #states
+  employee_state.each { |state|
     employees_state = employees.select { |employee| employee.state == state }
-
     dept_plants = []
     employees_state.each { |x| dept_plants << x.plant }
     employees_state_plant = dept_plants.uniq
 
+    #plant
     employees_state_plant.each { |plant_num|
       employees_plant =  employees.select { |employee| employee.plant == plant_num }
       employees_dept = []
       employees_plant.each { |x| employees_dept << x.dept }
       employee_dept_uni = employees_dept.uniq
 
+      #dept
       employee_dept_uni.each { |dept|
         employees_dept =  employees.select { |employee| employee.dept == dept }
-        employees_dept.each { |x| puts x.name }
-        puts dept
+        employees_dept.each { |x| file.outputEmployee(x) }
+        printf "\n%14s TOTAL FOR DEPT %-3s *\n", employees_dept.map(&:count).inject(0, :+), dept
       }
-      puts plant_num
+      printf "%14s TOTAL FOR PLANT %-2s **\n", employees_plant.map(&:count).inject(0, :+), plant_num
     }
-    puts state
+    printf "%14s TOTAL FOR STATE %s ***\n", employees_state.map(&:count).inject(0, :+), state
+    printf "%14s GRAND TOTAL \t\t****\n", employees.map(&:count).inject(0, :+), state
   }
 end
