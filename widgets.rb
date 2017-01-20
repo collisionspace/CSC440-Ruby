@@ -9,7 +9,9 @@ class Widgets
   dept_state = []
   employees.each { |x| dept_state << x.state }
   employee_state = dept_state.uniq
-  puts "STATE PLANT DEPT EMPID COUNT NAME"
+
+
+  puts 'STATE PLANT DEPT EMPID COUNT NAME'
   #states
   employee_state.each { |state|
     employees_state = employees.select { |employee| employee.state == state }
@@ -20,14 +22,16 @@ class Widgets
     #plant
     employees_state_plant.each { |plant_num|
       employees_plant =  employees.select { |employee| employee.plant == plant_num }
+
       employees_dept = []
       employees_plant.each { |x| employees_dept << x.dept }
       employee_dept_uni = employees_dept.uniq
 
+
       #dept
       employee_dept_uni.each { |dept|
-        puts ""
-        employees_dept =  employees.select { |employee| employee.dept == dept }
+        puts ''
+        employees_dept =  employees_plant.select { |employee| employee.dept == dept }
         employees_dept.each { |x| file.outputEmployee(x) }
         printf "\n%28s TOTAL FOR DEPT %-3s *\n", employees_dept.map(&:count).inject(0, :+), dept
       }
