@@ -1,5 +1,5 @@
 class Employee
-  # constructor method
+  #constructor method
   #STATE,PLANT,DEPT,EMPID,NAME,COUNT
   attr_accessor :state, :dept, :name, :count, :plant, :empid
 
